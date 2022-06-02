@@ -83,17 +83,25 @@ export default function Form({setName}) {
                           name="name"
                           label="ニックネーム"
                           onChange = {(e) => setString(e.target.value)}
+                          onKeyDown = {(e) => {
+                            if(e.key === "Enter"){
+                              setName(string);
+                              e.preventDefault();
+                            }
+                          }}
                           />
                       </Grid>
                       <Grid item xs={12}>
                         <Box alignItems="center" justifyContent="space-between" className={classes.actions}>
                           <Button
-                            type="submit"
                             variant="contained"
                             color="primary"
                             size="large"
                             className={classes.primaryAction}
                             disabled={disabled}
+                            onClick={() => {
+                              setName(string);
+                            }}
                           >
                             {content['primary-action']}
                           </Button>
