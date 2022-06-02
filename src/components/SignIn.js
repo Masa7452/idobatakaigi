@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(0),
-      width: 'auto'
     }
   }
 }));
@@ -44,10 +43,8 @@ export default function Form(props) {
   const classes = useStyles();
 
   const content = {
-    'header': 'Lorem ipsum dolor sit amet',
-    'description': 'Suspendisse aliquam tellus ante, porttitor mattis diam eleifend quis.',
-    'primary-action': 'Sign in',
-    'secondary-action': 'Forgot your password?',
+    'header': 'ようこそ',
+    'primary-action': 'はじめる',
     ...props.content
   };
 
@@ -66,15 +63,11 @@ export default function Form(props) {
               </Box>
               <Box mt={2} px={4}>
                 <Typography variant="h5" component="h3" align="center" gutterBottom={true}>{content['header']}</Typography>
-                <Typography variant="body2" component="p" color="textSecondary" align="center">{content['description']}</Typography>
                 <Box my={3}>
                   <form noValidate>
                     <Grid container spacing={2}>
                       <Grid item xs={12}>
-                        <TextField variant="outlined" required fullWidth size="small" name="email" label="E-mail address" />
-                      </Grid>
-                      <Grid item xs={12}>
-                        <TextField variant="outlined" required fullWidth size="small" type="password" name="password" label="Password" />
+                        <TextField variant="outlined" required fullWidth size="small" name="name" label="ニックネーム" />
                       </Grid>
                       <Grid item xs={12}>
                         <Box alignItems="center" justifyContent="space-between" className={classes.actions}>
