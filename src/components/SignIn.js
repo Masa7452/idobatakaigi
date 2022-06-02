@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -41,11 +41,20 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Form({setName}) {
   const classes = useStyles();
+  const [ disabled, setDisabled] = useState(true);
+  const [string, setString] = useState('');
+
+  useEffect(
+    () => {
+      const disabled = string ==='';
+      setDisabled(disabled);
+    },
+    [string]
+  );
 
   const content = {
     'header': 'ようこそ',
     'primary-action': 'はじめる',
-    ...props.content
   };
 
   return (
@@ -67,12 +76,25 @@ export default function Form({setName}) {
                   <form noValidate>
                     <Grid container spacing={2}>
                       <Grid item xs={12}>
-                        <TextField variant="outlined" required fullWidth size="small" name="name" label="ニックネーム" />
+                        <TextField
+                          variant="outlined"
+                          required fullWidth
+                          size="small"
+                          name="name"
+                          label="ニックネーム"
+                          onChange = {(e) => setString(e.target.value)}
+                          />
                       </Grid>
                       <Grid item xs={12}>
                         <Box alignItems="center" justifyContent="space-between" className={classes.actions}>
-                          <Link href="#" color="textSecondary">{content['secondary-action']}</Link>
-                          <Button type="submit" variant="contained" color="primary" size="large" className={classes.primaryAction}>
+                          <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            size="large"
+                            className={classes.primaryAction}
+                            disabled={disabled}
+                          >
                             {content['primary-action']}
                           </Button>
                         </Box>
