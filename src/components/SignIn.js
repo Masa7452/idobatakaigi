@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Form(props) {
+export default function Form({setName}) {
   const classes = useStyles();
 
   const content = {
