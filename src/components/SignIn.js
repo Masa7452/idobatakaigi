@@ -40,12 +40,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Form({setName}) {
-  const classes = useStyles();
-  const [ disabled, setDisabled] = useState(true);
-  const [string, setString] = useState('');
+  const classes                  = useStyles();
+  // ボタン活性管理
+  const [disabled, setDisabled]  = useState(true);
+  // 入力フォーム文字
+  const [string, setString]      = useState('');
+  // 編集中フラグ
+  const [isComposed, setIsComposed]  = useState(false);
 
+  // フォーム 入力時
   useEffect(
     () => {
+      // 空文字でない場合のみ、ボタンを非活性にする
       const disabled = string ==='';
       setDisabled(disabled);
     },
@@ -85,9 +91,22 @@ export default function Form({setName}) {
                           onChange = {(e) => setString(e.target.value)}
                           onKeyDown = {(e) => {
                             if(e.key === "Enter"){
+                              // 編集中の場合は処理中断
+                              if(isComposed) return;
                               setName(string);
+                              // ページのリロードを止める
                               e.preventDefault();
                             }
+                          }}
+                          // 日本語入力スタート
+                          onCompositionStart={() => {
+                            // 編集中
+                            setIsComposed(true);
+                          }}
+                          // 日本語入力終了
+                          onCompositionEnd={() => {
+                            // 編集終了
+                            setIsComposed(false);
                           }}
                           />
                       </Grid>
