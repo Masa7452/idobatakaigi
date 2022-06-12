@@ -1,6 +1,7 @@
 import React from "react";
 import { TextField } from "@material-ui/core";
 import { useState } from "react";
+import { pushMessage } from "../firebase";
 
 const MessageField = ({name, text, setText}) => {
     const [isComposed, setIsComposed] = useState(false);
@@ -11,9 +12,11 @@ const MessageField = ({name, text, setText}) => {
         onKeyDown = {(e) => {
             // 編集中の場合は処理中断
             if(isComposed) return;
-            if(e.target.value == '') return;
+
+            const text = e.target.value;
+            if(text == '') return;
             if(e.key === "Enter"){
-                console.log('push messsage to firebase');
+                pushMessage({name: 'ハム', text})
                 // テキストフィールドをクリア
                 setText('');
                 // ページのリロードを止める
