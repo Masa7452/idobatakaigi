@@ -14,9 +14,9 @@ const MessageField = ({name, text, setText}) => {
             if(isComposed) return;
 
             const text = e.target.value;
-            if(text == '') return;
+            if(text === '') return;
             if(e.key === "Enter"){
-                pushMessage({name: 'ハム', text})
+                pushMessage({name, text})
                 // テキストフィールドをクリア
                 setText('');
                 // ページのリロードを止める
