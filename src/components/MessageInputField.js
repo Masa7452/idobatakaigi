@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Avatar, Grid } from "@material-ui/core";
 import { gravatarPath } from "../gravator";
@@ -14,6 +14,7 @@ const useStyles = makeStyles({
 })
 
 const MessageInputField = ({name}) => {
+    const inputEl = useRef(null);
     const [text, setText] = useState('');
 
     const classes = useStyles();
@@ -25,10 +26,21 @@ const MessageInputField = ({name}) => {
                     <Avatar src={gravatar_path} />
                 </Grid>
                 <Grid item xs={10}>
-                    <MessageField name={name} text={text} setText={setText} />
+                    <MessageField
+                        inputEl={inputEl}
+                        name={name}
+                        text={text}
+                        setText={setText}
+                    />
                 </Grid>
                 <Grid item xs={1}>
-                    <MessageSubmitButton name={name} text={text} setText={setText}></MessageSubmitButton>
+                    <MessageSubmitButton
+                        inputEl={inputEl}
+                        name={name}
+                        text={text}
+                        setText={setText}
+                    >
+                    </MessageSubmitButton>
                 </Grid>
             </Grid>
         </div>
