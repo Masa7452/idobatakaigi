@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
     Avatar,
     ListItem,
@@ -8,10 +8,18 @@ import {
  } from '@material-ui/core';
  import { gravatarPath } from '../gravatar';
 
-const MessageItem = ({name, text}) => {
+const MessageItem = ({name, text, isLastItem}) => {
     const avatarPath = gravatarPath(name);
+    const ref = useRef(null);
+
+    useEffect(() => {
+        if(isLastItem){
+            ref.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [isLastItem])
+
     return (
-        <ListItem divider={true}>
+        <ListItem divider={true} ref={ref}>
             <ListItemAvatar>
                 <Avatar src={avatarPath} />
             </ListItemAvatar>

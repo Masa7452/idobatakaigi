@@ -32,10 +32,12 @@ const MessageList = () => {
         });
     }, [])
 
+    const length = messages.length;
+
     return (<List className={classes.root}>
             {
-                messages.map(({key, name, text}) => {
-                    return <MessageItem key={key} name={name} text={text}>{text}</MessageItem>
+                messages.map(({key, name, text}, index) => {
+                    return <MessageItem key={key} name={name} text={text} isLastItem={index + 1 === length}>{text}</MessageItem>
                 })
             }
         </List>
